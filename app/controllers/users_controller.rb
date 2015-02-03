@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-
+    before_filter :check_session!, :only => [:me, :edit, :update]
+    
   def new
     @user = User.new
 
@@ -9,8 +10,34 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.create!(params[:user])
-    sign_in_and_redirect @user
+	@user = User.new(params[:user])
+	respond_to do |format|
+      	
+        if @user.save
+            sign_in @user
+            redirect_to :action => 'me'
+        else
+            format.html { render action: 'new' }
+        end
+  	end
   end
+
+  def me
+	@user = User.find(current_user)
+  end
+
+  def edit
+     @user = User.find(current_user) 
+  end
+    
+  def update
+      ##@user = User.new(params[:user])
+    if User.update(params[:id],params[:user])
+        #User.update @user.id, params[:user]
+        redirect_to :action => 'me'
+    else
+        render action: 'edit'
+    end
+  end      
 
 end

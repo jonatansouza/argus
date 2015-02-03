@@ -1,17 +1,28 @@
-<div class="navbar navbar-inverse navbar-fixed-top">
+<div class="navbar navbar-inverse">
   <div class="navbar-inner">
-    <div class="container">
-      <a class="brand" href="/">Doorkeeper</a>
-      <div class="nav-collapse collapse">
+    <div class="container" style="width:auto">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+        <% if user_signed_in? == false %>
+            <a class="brand" href="/"><strong>AUTH</strong> <small>comcidis</small></a>
+        <% end %>
+        <% if user_signed_in? %>
+            <a class="brand" href="/users/me"><strong>AUTH</strong> <small>comcidis</small></a>
+        <% end %>
+      <div class="nav-collapse">
         <ul class="nav">
-          <li><a href="#about-doorkeeper-gem">About the Gem</a></li>
-          <li><a href="#installation">Installation</a></li>
-          <li><a href="#configuration">Configuration</a></li>
-          <li><a href="#seed-data">Seed Data</a></li>
-          <li><a href="#oauth-endpoint">OAuth Endpoint</a></li>
-          <li><a href="#example-api">Example API</a></li>
-          <li><a href="#client-applications">Client Apps</a></li>
+            <% if user_signed_in? %>
+                <li class="active"><a href="/users/me">Profile</a></li>
+             <% end %>
         </ul>
+	<ul class="nav pull-right">
+        <% if user_signed_in? %>
+            <li><a href="/users/sign_out"><%= current_user.name %> <strong>(Sign Out)</strong> </a></li>
+        <% end %>
+	</ul>
       </div>
     </div>
   </div>

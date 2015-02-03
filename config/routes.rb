@@ -1,7 +1,9 @@
 DoorkeeperProvider::Application.routes.draw do
   use_doorkeeper
 
-  devise_for :users
+  devise_for :users do
+    root :to => "devise/sessions#new"
+  end
 
   namespace :api do
     namespace :v1 do
@@ -14,6 +16,9 @@ DoorkeeperProvider::Application.routes.draw do
 
   get "/users/sign_up" => "users#new"
   post "/user" => "users#create"
-
-  root :to => "home#index"
+  get "/users/me" => "users#me"
+  get "/users/edit" => "users#edit"
+  put "/user.:id" => "users#update"
+    
+      
 end

@@ -10,7 +10,7 @@ module Api::V1
     end
 
     def create
-      respond_with 'api_v1', User.create!(params[:user])
+      respond_with 'api_v1', User.create(params[:user])
     end
   end
 end
