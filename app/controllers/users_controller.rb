@@ -15,7 +15,7 @@ class UsersController < ApplicationController
       	
         if @user.save
             sign_in @user
-            redirect_to :action => 'me'
+            redirect_to :action => 'me' and return
         else
             format.html { render action: 'new' }
         end
