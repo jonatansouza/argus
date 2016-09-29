@@ -1,0 +1,8 @@
+#dependencies postgreesql
+
+sudo apt-get install libpq-dev postgresql-devel
+gem install pg
+
+#sqlite
+
+sudo apt-get install libsqlite3-dev
